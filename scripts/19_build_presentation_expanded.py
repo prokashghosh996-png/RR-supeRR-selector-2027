@@ -600,19 +600,23 @@ for row_idx, r_data in enumerate(top10_batters_data, 1):
         cell = table_s6.cell(row_idx, col_idx)
         cell.fill.solid()
         cell.fill.fore_color.rgb = C_WHITE if row_idx % 2 == 1 else C_LIGHT
+        cell.margin_left = Inches(0.06)
+        cell.margin_right = Inches(0.06)
+        cell.margin_top = Inches(0.04)
+        cell.margin_bottom = Inches(0.04)
         cell.text = val
-        p = cell.text_frame.paragraphs[0]
-        p.font.name = FONT_NAME
-        p.font.size = Pt(11)
-        p.font.color.rgb = C_DARK
-        if col_idx in [0, 3, 4, 5, 6, 7, 8]:
-            p.alignment = PP_ALIGN.CENTER
-        if col_idx == 1:
-            p.font.bold = True
-            p.font.color.rgb = C_NAVY
-        if col_idx == 8:
-            p.font.bold = True
-            p.font.color.rgb = C_PINK_DARK
+        for p in cell.text_frame.paragraphs:
+            p.font.name = FONT_NAME
+            p.font.size = Pt(11)
+            p.font.color.rgb = C_DARK
+            if col_idx in [0, 3, 4, 5, 6, 7, 8]:
+                p.alignment = PP_ALIGN.CENTER
+            if col_idx == 1:
+                p.font.bold = True
+                p.font.color.rgb = C_NAVY
+            if col_idx == 8:
+                p.font.bold = True
+                p.font.color.rgb = C_PINK_DARK
 
 # Bottom Takeaway Card (Filling from 5.55 to 6.90)
 takeaway_s6 = slide6.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.6), Inches(5.55), Inches(12.133), Inches(1.35))
@@ -687,19 +691,23 @@ for row_idx, r_data in enumerate(top10_bowlers_data, 1):
         cell = table_s7.cell(row_idx, col_idx)
         cell.fill.solid()
         cell.fill.fore_color.rgb = C_WHITE if row_idx % 2 == 1 else C_LIGHT
+        cell.margin_left = Inches(0.06)
+        cell.margin_right = Inches(0.06)
+        cell.margin_top = Inches(0.04)
+        cell.margin_bottom = Inches(0.04)
         cell.text = val
-        p = cell.text_frame.paragraphs[0]
-        p.font.name = FONT_NAME
-        p.font.size = Pt(11)
-        p.font.color.rgb = C_DARK
-        if col_idx in [0, 3, 4, 5, 6, 7, 8]:
-            p.alignment = PP_ALIGN.CENTER
-        if col_idx == 1:
-            p.font.bold = True
-            p.font.color.rgb = C_NAVY
-        if col_idx == 8:
-            p.font.bold = True
-            p.font.color.rgb = C_PINK_DARK
+        for p in cell.text_frame.paragraphs:
+            p.font.name = FONT_NAME
+            p.font.size = Pt(11)
+            p.font.color.rgb = C_DARK
+            if col_idx in [0, 3, 4, 5, 6, 7, 8]:
+                p.alignment = PP_ALIGN.CENTER
+            if col_idx == 1:
+                p.font.bold = True
+                p.font.color.rgb = C_NAVY
+            if col_idx == 8:
+                p.font.bold = True
+                p.font.color.rgb = C_PINK_DARK
 
 # Bottom Takeaway Card (Filling from 5.55 to 6.90)
 takeaway_s7 = slide7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.6), Inches(5.55), Inches(12.133), Inches(1.35))
@@ -742,68 +750,89 @@ def add_three_profile_cards(slide, cards_info):
         card.fill.fore_color.rgb = C_WHITE
         card.line.color.rgb = C_BORDER
         
-        header_box = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, left, top, width, Inches(0.95))
+        header_box = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, left, top, width, Inches(1.05))
         header_box.fill.solid()
         header_box.fill.fore_color.rgb = col
         header_box.line.color.rgb = col
         
-        tx_h = slide.shapes.add_textbox(left + Inches(0.15), top + Inches(0.08), width - Inches(0.3), Inches(0.80))
+        tx_h = slide.shapes.add_textbox(left + Inches(0.15), top + Inches(0.06), width - Inches(0.3), Inches(0.92))
         tf_h = tx_h.text_frame
         tf_h.word_wrap = True
         
         p_rk = tf_h.paragraphs[0]
         p_rk.text = f"RANK {rank} | {name.upper()}"
         p_rk.font.name = FONT_NAME
-        p_rk.font.size = Pt(15)
+        p_rk.font.size = Pt(17)
         p_rk.font.bold = True
         p_rk.font.color.rgb = C_WHITE
+        p_rk.space_after = Pt(2)
         
         p_role = tf_h.add_paragraph()
         p_role.text = role
         p_role.font.name = FONT_NAME
-        p_role.font.size = Pt(10.5)
+        p_role.font.size = Pt(11.5)
         p_role.font.italic = True
         p_role.font.color.rgb = C_GOLD
         
-        tx = slide.shapes.add_textbox(left + Inches(0.2), top + Inches(1.05), width - Inches(0.4), height - Inches(1.15))
+        tx = slide.shapes.add_textbox(left + Inches(0.2), top + Inches(1.15), width - Inches(0.4), height - Inches(1.25))
         tf = tx.text_frame
         tf.word_wrap = True
         
         p_score = tf.paragraphs[0]
         p_score.text = f"Reliability Score: {bpri}"
         p_score.font.name = FONT_NAME
-        p_score.font.size = Pt(13)
+        p_score.font.size = Pt(15)
         p_score.font.bold = True
         p_score.font.color.rgb = col
-        p_score.space_after = Pt(6)
+        p_score.space_after = Pt(10)
         
         p_stats = tf.add_paragraph()
-        p_stats.text = f"Key Pressure Stats:\n{stats}"
-        p_stats.font.name = FONT_NAME
-        p_stats.font.size = Pt(10.5)
-        p_stats.font.color.rgb = C_DARK
-        p_stats.space_after = Pt(6)
+        r1 = p_stats.add_run()
+        r1.text = "Key Pressure Metrics:\n"
+        r1.font.bold = True
+        r1.font.size = Pt(12.5)
+        r1.font.color.rgb = C_NAVY
+        r2 = p_stats.add_run()
+        r2.text = stats
+        r2.font.size = Pt(12)
+        r2.font.color.rgb = C_DARK
+        p_stats.space_after = Pt(10)
         
         p_str = tf.add_paragraph()
-        p_str.text = f"Analytical Strength:\n{strength}"
-        p_str.font.name = FONT_NAME
-        p_str.font.size = Pt(10.5)
-        p_str.font.color.rgb = C_DARK
-        p_str.space_after = Pt(6)
+        r3 = p_str.add_run()
+        r3.text = "Analytical Strength:\n"
+        r3.font.bold = True
+        r3.font.size = Pt(12.5)
+        r3.font.color.rgb = C_NAVY
+        r4 = p_str.add_run()
+        r4.text = strength
+        r4.font.size = Pt(12)
+        r4.font.color.rgb = C_DARK
+        p_str.space_after = Pt(10)
         
         p_risk = tf.add_paragraph()
-        p_risk.text = f"Limitation / Risk:\n{risk}"
-        p_risk.font.name = FONT_NAME
-        p_risk.font.size = Pt(10.5)
-        p_risk.font.color.rgb = C_DARK
-        p_risk.space_after = Pt(6)
+        r5 = p_risk.add_run()
+        r5.text = "Limitation / Risk:\n"
+        r5.font.bold = True
+        r5.font.size = Pt(12.5)
+        r5.font.color.rgb = C_NAVY
+        r6 = p_risk.add_run()
+        r6.text = risk
+        r6.font.size = Pt(12)
+        r6.font.color.rgb = C_DARK
+        p_risk.space_after = Pt(10)
         
         p_fit = tf.add_paragraph()
-        p_fit.text = f"RR Tactical Fit (IPL 2027):\n{rr_fit}"
-        p_fit.font.name = FONT_NAME
-        p_fit.font.size = Pt(11)
-        p_fit.font.bold = True
-        p_fit.font.color.rgb = C_PINK_DARK
+        r7 = p_fit.add_run()
+        r7.text = "RR Tactical Fit (IPL 2027):\n"
+        r7.font.bold = True
+        r7.font.size = Pt(13)
+        r7.font.color.rgb = C_PINK_DARK
+        r8 = p_fit.add_run()
+        r8.text = rr_fit
+        r8.font.size = Pt(12)
+        r8.font.bold = True
+        r8.font.color.rgb = C_DARK
 
 # ==========================================
 # SLIDE 8: BATTERS 1 TO 3
@@ -933,37 +962,37 @@ for idx, (rank, name, role, bopri, stats, strength, risk, rr_fit, col) in enumer
     accent.fill.fore_color.rgb = col
     accent.line.color.rgb = col
     
-    tx = slide10.shapes.add_textbox(left + Inches(0.25), top + Inches(0.12), width - Inches(0.35), height - Inches(0.2))
+    tx = slide10.shapes.add_textbox(left + Inches(0.25), top + Inches(0.10), width - Inches(0.35), height - Inches(0.18))
     tf = tx.text_frame
     tf.word_wrap = True
     
     p_t = tf.paragraphs[0]
     p_t.text = f"RANK {rank} | {name.upper()} ({bopri})"
     p_t.font.name = FONT_NAME
-    p_t.font.size = Pt(13.5)
+    p_t.font.size = Pt(15.5)
     p_t.font.bold = True
     p_t.font.color.rgb = col
-    p_t.space_after = Pt(2)
+    p_t.space_after = Pt(4)
     
     p_r = tf.add_paragraph()
-    p_r.text = f"{role} | {stats}"
+    p_r.text = f"{role}\nKey Metrics: {stats}"
     p_r.font.name = FONT_NAME
-    p_r.font.size = Pt(10)
+    p_r.font.size = Pt(12)
     p_r.font.bold = True
-    p_r.font.color.rgb = C_DARK
-    p_r.space_after = Pt(3)
+    p_r.font.color.rgb = C_NAVY
+    p_r.space_after = Pt(4)
     
     p_s = tf.add_paragraph()
-    p_s.text = f"Strength: {strength}"
+    p_s.text = f"Analytical Strength: {strength}"
     p_s.font.name = FONT_NAME
-    p_s.font.size = Pt(10)
+    p_s.font.size = Pt(11.5)
     p_s.font.color.rgb = C_DARK
-    p_s.space_after = Pt(2)
+    p_s.space_after = Pt(4)
     
     p_f = tf.add_paragraph()
-    p_f.text = f"RR Fit: {rr_fit}"
+    p_f.text = f"RR Tactical Fit: {rr_fit}"
     p_f.font.name = FONT_NAME
-    p_f.font.size = Pt(10.5)
+    p_f.font.size = Pt(12)
     p_f.font.bold = True
     p_f.font.color.rgb = C_PINK_DARK
 
@@ -1012,61 +1041,77 @@ for idx, (rank, name, role, bopri, stats, strength, risk, rr_fit, col) in enumer
     card.fill.fore_color.rgb = C_WHITE
     card.line.color.rgb = C_BORDER
     
-    header_box = slide11.shapes.add_shape(MSO_SHAPE.RECTANGLE, left, top, width, Inches(0.85))
+    header_box = slide11.shapes.add_shape(MSO_SHAPE.RECTANGLE, left, top, width, Inches(1.05))
     header_box.fill.solid()
     header_box.fill.fore_color.rgb = col
     header_box.line.color.rgb = col
     
-    tx_h = slide11.shapes.add_textbox(left + Inches(0.15), top + Inches(0.06), width - Inches(0.3), Inches(0.75))
+    tx_h = slide11.shapes.add_textbox(left + Inches(0.15), top + Inches(0.06), width - Inches(0.3), Inches(0.92))
     tf_h = tx_h.text_frame
     tf_h.word_wrap = True
     
     p_rk = tf_h.paragraphs[0]
     p_rk.text = f"RANK {rank} | {name.upper()}"
     p_rk.font.name = FONT_NAME
-    p_rk.font.size = Pt(14)
+    p_rk.font.size = Pt(16.5)
     p_rk.font.bold = True
     p_rk.font.color.rgb = C_WHITE
+    p_rk.space_after = Pt(2)
     
     p_role = tf_h.add_paragraph()
     p_role.text = role
     p_role.font.name = FONT_NAME
-    p_role.font.size = Pt(10)
+    p_role.font.size = Pt(11.5)
     p_role.font.italic = True
     p_role.font.color.rgb = C_GOLD
     
-    tx = slide11.shapes.add_textbox(left + Inches(0.18), top + Inches(0.95), width - Inches(0.36), height - Inches(1.05))
+    tx = slide11.shapes.add_textbox(left + Inches(0.18), top + Inches(1.15), width - Inches(0.36), height - Inches(1.25))
     tf = tx.text_frame
     tf.word_wrap = True
     
     p_score = tf.paragraphs[0]
-    p_score.text = bopri
+    p_score.text = f"Reliability Rating: {bopri}"
     p_score.font.name = FONT_NAME
-    p_score.font.size = Pt(12)
+    p_score.font.size = Pt(14)
     p_score.font.bold = True
     p_score.font.color.rgb = col
-    p_score.space_after = Pt(4)
+    p_score.space_after = Pt(8)
     
     p_stats = tf.add_paragraph()
-    p_stats.text = f"Pressure Stats:\n{stats}"
-    p_stats.font.name = FONT_NAME
-    p_stats.font.size = Pt(10)
-    p_stats.font.color.rgb = C_DARK
-    p_stats.space_after = Pt(4)
+    r1 = p_stats.add_run()
+    r1.text = "Pressure Stats:\n"
+    r1.font.bold = True
+    r1.font.size = Pt(12)
+    r1.font.color.rgb = C_NAVY
+    r2 = p_stats.add_run()
+    r2.text = stats
+    r2.font.size = Pt(12)
+    r2.font.color.rgb = C_DARK
+    p_stats.space_after = Pt(8)
     
     p_str = tf.add_paragraph()
-    p_str.text = f"Strength: {strength}"
-    p_str.font.name = FONT_NAME
-    p_str.font.size = Pt(10)
-    p_str.font.color.rgb = C_DARK
-    p_str.space_after = Pt(4)
+    r3 = p_str.add_run()
+    r3.text = "Key Analytical Strength:\n"
+    r3.font.bold = True
+    r3.font.size = Pt(12)
+    r3.font.color.rgb = C_NAVY
+    r4 = p_str.add_run()
+    r4.text = strength
+    r4.font.size = Pt(12)
+    r4.font.color.rgb = C_DARK
+    p_str.space_after = Pt(8)
     
     p_fit = tf.add_paragraph()
-    p_fit.text = f"RR Fit: {rr_fit}"
-    p_fit.font.name = FONT_NAME
-    p_fit.font.size = Pt(10.5)
-    p_fit.font.bold = True
-    p_fit.font.color.rgb = C_PINK_DARK
+    r5 = p_fit.add_run()
+    r5.text = "RR Tactical Fit:\n"
+    r5.font.bold = True
+    r5.font.size = Pt(12.5)
+    r5.font.color.rgb = C_PINK_DARK
+    r6 = p_fit.add_run()
+    r6.text = rr_fit
+    r6.font.size = Pt(12)
+    r6.font.bold = True
+    r6.font.color.rgb = C_DARK
 
 # Bottom Card: Matheesha Pathirana & Honorable Mentions (Filling from 5.55 to 6.90)
 card_s11_bot = slide11.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.6), Inches(5.55), Inches(12.133), Inches(1.35))
@@ -1081,10 +1126,10 @@ tf_s11_b.word_wrap = True
 p_b_t = tf_s11_b.paragraphs[0]
 p_b_t.text = "Marquee Pace Target Highlight: Matheesha Pathirana (Rank 11 Overall | Rank 7 Strike Bowling)"
 p_b_t.font.name = FONT_NAME
-p_b_t.font.size = Pt(12)
+p_b_t.font.size = Pt(13.5)
 p_b_t.font.bold = True
 p_b_t.font.color.rgb = C_PINK_DARK
-p_b_t.space_after = Pt(2)
+p_b_t.space_after = Pt(3)
 
 p_b_d = tf_s11_b.add_paragraph()
 p_b_d.text = (
@@ -1093,7 +1138,7 @@ p_b_d.text = (
     "• Honorable Mentions: Mujeeb Ur Rahman (Rank 7, 6.95 Econ), Mahedi Hasan (Rank 8, 6.83 Econ), Sikandar Raza (Rank 10, 6.76 Econ)."
 )
 p_b_d.font.name = FONT_NAME
-p_b_d.font.size = Pt(10.5)
+p_b_d.font.size = Pt(11.5)
 p_b_d.font.color.rgb = C_DARK
 
 # ==========================================
