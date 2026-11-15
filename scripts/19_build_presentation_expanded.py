@@ -286,14 +286,18 @@ for row_idx, r_data in enumerate(rows_s3, 1):
         cell = table_s3.cell(row_idx, col_idx)
         cell.fill.solid()
         cell.fill.fore_color.rgb = C_WHITE if row_idx % 2 == 1 else C_LIGHT
+        cell.margin_left = Inches(0.06)
+        cell.margin_right = Inches(0.06)
+        cell.margin_top = Inches(0.05)
+        cell.margin_bottom = Inches(0.05)
         cell.text = val
-        p = cell.text_frame.paragraphs[0]
-        p.font.name = FONT_NAME
-        p.font.size = Pt(10.5)
-        p.font.color.rgb = C_DARK
-        if col_idx == 0:
-            p.font.bold = True
-            p.font.color.rgb = C_NAVY
+        for p in cell.text_frame.paragraphs:
+            p.font.name = FONT_NAME
+            p.font.size = Pt(10.5)
+            p.font.color.rgb = C_DARK
+            if col_idx == 0:
+                p.font.bold = True
+                p.font.color.rgb = C_NAVY
 
 # Bottom Two Cards (Filling from 4.25 to 6.85)
 card_s3_left = slide3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.6), Inches(4.30), Inches(5.95), Inches(2.55))
@@ -435,14 +439,18 @@ for row_idx, r_data in enumerate(rows_s4, 1):
         cell = table_s4.cell(row_idx, col_idx)
         cell.fill.solid()
         cell.fill.fore_color.rgb = C_WHITE if row_idx % 2 == 1 else C_LIGHT
+        cell.margin_left = Inches(0.06)
+        cell.margin_right = Inches(0.06)
+        cell.margin_top = Inches(0.05)
+        cell.margin_bottom = Inches(0.05)
         cell.text = val
-        p = cell.text_frame.paragraphs[0]
-        p.font.name = FONT_NAME
-        p.font.size = Pt(10)
-        p.font.color.rgb = C_DARK
-        if col_idx == 0:
-            p.font.bold = True
-            p.font.color.rgb = C_NAVY
+        for p in cell.text_frame.paragraphs:
+            p.font.name = FONT_NAME
+            p.font.size = Pt(10)
+            p.font.color.rgb = C_DARK
+            if col_idx == 0:
+                p.font.bold = True
+                p.font.color.rgb = C_NAVY
 
 # ==========================================
 # SLIDE 5: METHODOLOGY & SCORING FORMULATION
@@ -533,15 +541,19 @@ for row_idx, r_data in enumerate(rows_s5, 1):
             cell.fill.fore_color.rgb = C_LIGHT_PINK if "Batting" in r_data[0] else C_LIGHT_BLUE
         else:
             cell.fill.fore_color.rgb = C_WHITE if row_idx % 2 == 1 else C_LIGHT
+        cell.margin_left = Inches(0.06)
+        cell.margin_right = Inches(0.06)
+        cell.margin_top = Inches(0.05)
+        cell.margin_bottom = Inches(0.05)
         cell.text = val
-        p = cell.text_frame.paragraphs[0]
-        p.font.name = FONT_NAME
-        p.font.size = Pt(9.5)
-        p.font.color.rgb = C_DARK
-        if "Composite" in r_data[0] or col_idx == 0:
-            p.font.bold = True
-            if "Composite" in r_data[0]:
-                p.font.color.rgb = C_PINK_DARK if "Batting" in r_data[0] else C_NAVY
+        for p in cell.text_frame.paragraphs:
+            p.font.name = FONT_NAME
+            p.font.size = Pt(9.5)
+            p.font.color.rgb = C_DARK
+            if "Composite" in r_data[0] or col_idx == 0:
+                p.font.bold = True
+                if "Composite" in r_data[0]:
+                    p.font.color.rgb = C_PINK_DARK if "Batting" in r_data[0] else C_NAVY
 
 # ==========================================
 # SLIDE 6: OFFICIAL TOP 10 BATTERS
@@ -1229,17 +1241,21 @@ for row_idx, r_data in enumerate(rows_s13, 1):
         cell = table_s13.cell(row_idx, col_idx)
         cell.fill.solid()
         cell.fill.fore_color.rgb = C_WHITE if row_idx % 2 == 1 else C_LIGHT
+        cell.margin_left = Inches(0.06)
+        cell.margin_right = Inches(0.06)
+        cell.margin_top = Inches(0.05)
+        cell.margin_bottom = Inches(0.05)
         cell.text = val
-        p = cell.text_frame.paragraphs[0]
-        p.font.name = FONT_NAME
-        p.font.size = Pt(9.5)
-        p.font.color.rgb = C_DARK
-        if col_idx in [1, 2, 3, 4]:
-            p.alignment = PP_ALIGN.CENTER
-            p.font.bold = True
-        if col_idx == 0:
-            p.font.bold = True
-            p.font.color.rgb = C_NAVY
+        for p in cell.text_frame.paragraphs:
+            p.font.name = FONT_NAME
+            p.font.size = Pt(9.5)
+            p.font.color.rgb = C_DARK
+            if col_idx in [1, 2, 3, 4]:
+                p.alignment = PP_ALIGN.CENTER
+                p.font.bold = True
+            if col_idx == 0:
+                p.font.bold = True
+                p.font.color.rgb = C_NAVY
 
 # ==========================================
 # SLIDE 14: RR IPL 2027 STRATEGIC AUCTION PLAYBOOK
@@ -1283,7 +1299,7 @@ p_14_ld.font.color.rgb = C_DARK
 # Right Column: 4-Tier Auction Portfolio Table (1.15 to 6.85)
 table_shape_s14 = slide14.shapes.add_table(5, 4, Inches(6.45), Inches(1.15), Inches(6.283), Inches(5.70))
 table_s14 = table_shape_s14.table
-col_w_s14 = [Inches(1.5), Inches(1.4), Inches(1.883), Inches(1.5)]
+col_w_s14 = [Inches(1.45), Inches(1.65), Inches(1.70), Inches(1.483)]
 for i, w in enumerate(col_w_s14):
     table_s14.columns[i].width = w
 
@@ -1292,12 +1308,16 @@ for col_idx, h_text in enumerate(headers_s14):
     cell = table_s14.cell(0, col_idx)
     cell.fill.solid()
     cell.fill.fore_color.rgb = C_NAVY
+    cell.margin_left = Inches(0.06)
+    cell.margin_right = Inches(0.06)
+    cell.margin_top = Inches(0.06)
+    cell.margin_bottom = Inches(0.06)
     cell.text = h_text
-    p = cell.text_frame.paragraphs[0]
-    p.font.name = FONT_NAME
-    p.font.size = Pt(10.5)
-    p.font.bold = True
-    p.font.color.rgb = C_WHITE
+    for p in cell.text_frame.paragraphs:
+        p.font.name = FONT_NAME
+        p.font.size = Pt(10.5)
+        p.font.bold = True
+        p.font.color.rgb = C_WHITE
 
 rows_s14 = [
     [
@@ -1331,14 +1351,22 @@ for row_idx, r_data in enumerate(rows_s14, 1):
         cell = table_s14.cell(row_idx, col_idx)
         cell.fill.solid()
         cell.fill.fore_color.rgb = C_WHITE if row_idx % 2 == 1 else C_LIGHT
+        cell.margin_left = Inches(0.06)
+        cell.margin_right = Inches(0.06)
+        cell.margin_top = Inches(0.06)
+        cell.margin_bottom = Inches(0.06)
         cell.text = val
-        p = cell.text_frame.paragraphs[0]
-        p.font.name = FONT_NAME
-        p.font.size = Pt(9.5)
-        p.font.color.rgb = C_DARK
-        if col_idx == 0:
-            p.font.bold = True
-            p.font.color.rgb = C_PINK_DARK
+        for p in cell.text_frame.paragraphs:
+            p.font.name = FONT_NAME
+            p.font.size = Pt(10)
+            p.font.color.rgb = C_DARK
+            if col_idx == 0:
+                p.font.bold = True
+                p.font.color.rgb = C_PINK_DARK
+            elif col_idx == 1:
+                p.font.bold = True
+                p.font.color.rgb = C_NAVY
+                p.space_after = Pt(2)
 
 # ==========================================
 # SLIDE 15: CONCLUSION & UNSTOP CHECKLIST
